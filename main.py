@@ -50,10 +50,24 @@ def additionmatrix(A, B):
         return resultMatrix
 
 
-A = matrixinput()
-B = matrixinput()
+def matrixconstantmult(A, constant):
+    resultMatrix = []
 
-displaymatrix(additionmatrix(A, B))
+    for i in range(len(A)):
+        resultingLine = []
+
+        for j in range(len(A[i])):
+            resultingLine.append(constant * A[i][j])
+
+        resultMatrix.append(resultingLine)
+
+    return resultMatrix
+
+
+A = matrixinput()
+constant = int(input("Enter the constant of multiplication: "))
+
+displaymatrix(matrixconstantmult(A, constant))
 
 
 
