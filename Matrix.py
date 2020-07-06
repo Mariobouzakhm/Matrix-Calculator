@@ -66,6 +66,22 @@ class Matrix:
 
         return col
 
+    def cofactormatrix(self):
+        if not self.__issquare():
+            print('This operation cannot be performed')
+            return
+
+        result = []
+
+        for i in range(self.rows):
+            line = []
+            for j in range(self.columns):
+                line.append((((-1)**(i+j)) * self.gettruncatedmatrix(i + 1, j + 1).determinant()))
+
+            result.append(line)
+
+        return Matrix(self.rows, self.columns, result)
+
     def addition(self, B):
 
         if not isinstance(B, Matrix) or (self.rows != B.rows or self.columns != B.columns):
@@ -195,6 +211,7 @@ class Matrix:
     def determinant(self):
         if not self.__issquare():
             print('This operation cannot be performed.')
+            return
 
         if self.rows == 1:
             return self.values[0][0]
@@ -208,8 +225,26 @@ class Matrix:
 
         return det
 
+    def inverse(self):
+        if not self.__issquare():
+            print('This operation cannot be performed.')
+            return
+
+        det = self.determinant()
+        if det == 0:
+            print('This operation cannot be performed.')
+            return
+
+        cofactor = self.cofactormatrix().maindiagonaltranspose()
+        result = cofactor.constantmult(1/det)
+
+        return result
+
     def __issquare(self):
         return self.rows == self.columns
+
+
+
 
 
 

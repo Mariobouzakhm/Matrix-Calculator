@@ -17,6 +17,7 @@ def printmenu():
     print('3. Multiply matrices')
     print('4. Transpose matrix')
     print('5. Calculate a determinant')
+    print('6. Inverse matrix')
     print('0. Exit')
 
 
@@ -42,13 +43,6 @@ def matrixinput(order='', func=float):
     return Matrix(dimensions[0], dimensions[1], A)
 
 
-def test():
-    A = Matrix(1, 1, [[17]])
-    A.displaymatrix()
-
-    print(A.determinant())
-
-
 def main():
 
     while True:
@@ -71,11 +65,8 @@ def main():
             B.displaymatrix()
 
         elif cmd == '3':
-            # A = matrixinput(order='first')
-            # B = matrixinput(order='second')
-
-            A = Matrix(2, 3, [[1, 0, 17], [15, 9, 7]])
-            B = Matrix(3, 4, [[5, 6, 78, 9], [29, 31, 47, 1], [14, 17, 0, 3]])
+            A = matrixinput(order='first')
+            B = matrixinput(order='second')
 
             C = A.matricesmult(B)
             C.displaymatrix()
@@ -115,13 +106,19 @@ def main():
             print('The result is: ')
             print(str(det))
 
+        elif cmd == '6':
+            A = matrixinput()
+            B = A.inverse()
+
+            B.displaymatrix()
+
         elif cmd == '0':
             break
 
         print("")
 
 
-test()
+main()
 
 
 
