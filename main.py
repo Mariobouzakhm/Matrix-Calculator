@@ -8,12 +8,23 @@ Date: 06-2020
 Matrix Calculator Interface
 """
 
+from Matrix import Matrix
+
 
 def printmenu():
     print('1. Add matrices')
     print('2. Multiply matrix by a constant')
     print('3. Multiply matrices')
+    print('4. Transpose matrix')
+    print('5. Calculate a determinant')
     print('0. Exit')
+
+
+def printtransposeoptions():
+    print('1. Main diagonal')
+    print('2. Side diagonal')
+    print('3. Verical line')
+    print('4. Horizontal line')
 
 
 def matrixinput(order='', func=float):
@@ -28,102 +39,18 @@ def matrixinput(order='', func=float):
 
         A.append(numbers)
 
-    return A
+    return Matrix(dimensions[0], dimensions[1], A)
 
 
-def displaymatrix(matrix):
-    print('The result is: ')
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            print(str(matrix[i][j])+ " ", end='')
-        print("\n", end='')
+def test():
+    A = Matrix(1, 1, [[17]])
+    A.displaymatrix()
 
-
-def additionmatrix(A, B):
-    dimensions1 = [len(A), len(A[0])]
-    dimensions2 = [len(B), len(B[0])]
-
-    if dimensions1[0] != dimensions2[0] or dimensions1[1] != dimensions2[1]:
-        print("This operation cannot be performed")
-    else:
-        resultMatrix = []
-
-        for i in range(len(A)):
-            resultingLine = []
-            for j in range(len(A[i])):
-                sum = A[i][j] + B[i][j]
-                resultingLine.append(sum)
-
-            resultMatrix.append(resultingLine)
-
-        return resultMatrix
-
-
-def matrixconstantmult(A, constant):
-    resultMatrix = []
-
-    for i in range(len(A)):
-        resultingLine = []
-
-        for j in range(len(A[i])):
-            resultingLine.append(constant * A[i][j])
-
-        resultMatrix.append(resultingLine)
-
-    return resultMatrix
-
-
-def mattricesmult(A, B):
-    dimensions1 = [len(A), len(A[0])]
-    dimensions2 = [len(B), len(B[0])]
-
-    if dimensions1[1] != dimensions2[0]:
-        print("This operation cannot be performed.")
-
-    else:
-        result = []
-
-        for i in range(dimensions1[0]):
-            resultLine = []
-
-            list1 = A[i]
-            for j in range(dimensions2[1]):
-                list2 = getverticallist(B, j)
-
-                sum = dotproduct(list1, list2)
-
-                resultLine.append(sum)
-
-
-            result.append(resultLine)
-
-        return result
-
-
-def dotproduct(list1, list2):
-    if len(list1) != len(list2):
-        return 'ERROR'
-    else:
-        sum = 0
-
-        for i in range(len(list1)):
-            sum += (list1[i] * list2[i])
-
-        return sum
-
-
-def getverticallist(matrix, colnum):
-    if colnum > len(matrix):
-        return 'ERROR'
-
-    col = []
-    for i in range(len(matrix)):
-        col.append(matrix[i][colnum])
-
-    return col
+    print(A.determinant())
 
 
 def main():
+
     while True:
         printmenu()
 
@@ -133,29 +60,68 @@ def main():
             A = matrixinput(order='first')
             B = matrixinput(order='second')
 
-            C = additionmatrix(A, B)
-            displaymatrix(C)
+            C = A.addition(B)
+            C.displaymatrix()
 
         elif cmd == '2':
             A = matrixinput()
             constant = float(input('Enter constant: '))
 
-            B = matrixconstantmult(A, constant)
-            displaymatrix(B)
+            B = A.constantmult(constant)
+            B.displaymatrix()
 
         elif cmd == '3':
-            A = matrixinput(order='first')
-            B = matrixinput(order='second')
+            # A = matrixinput(order='first')
+            # B = matrixinput(order='second')
 
-            C = mattricesmult(A, B)
-            displaymatrix(C)
+            A = Matrix(2, 3, [[1, 0, 17], [15, 9, 7]])
+            B = Matrix(3, 4, [[5, 6, 78, 9], [29, 31, 47, 1], [14, 17, 0, 3]])
+
+            C = A.matricesmult(B)
+            C.displaymatrix()
+
+        elif cmd == '4':
+            print('')
+            printtransposeoptions()
+
+            cmd2 = input('Your choice: ')
+
+            if cmd2 == '1':
+               A = matrixinput()
+               B = A.maindiagonaltranspose()
+
+               B.displaymatrix()
+
+            elif cmd2 == '2':
+                A = matrixinput()
+                B = A.sidediagonaltranspose()
+
+                B.displaymatrix()
+            elif cmd2 == '3':
+                A = matrixinput()
+                B = A.verticaltranspose()
+
+                B.displaymatrix()
+            elif cmd2 == '4':
+                A = matrixinput()
+                B = A.horizontaltranspose()
+
+                B.displaymatrix()
+
+        elif cmd == '5':
+            A = matrixinput()
+            det = A.determinant()
+
+            print('The result is: ')
+            print(str(det))
 
         elif cmd == '0':
             break
 
         print("")
 
-main()
+
+test()
 
 
 
