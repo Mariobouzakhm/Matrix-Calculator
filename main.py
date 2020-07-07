@@ -11,7 +11,11 @@ Matrix Calculator Interface
 from Matrix import Matrix
 
 
+
 def printmenu():
+    """
+    Displays  the matrix calculator options.
+    """
     print('1. Add matrices')
     print('2. Subtract matrices')
     print('3. Multiply matrix by a constant')
@@ -23,6 +27,9 @@ def printmenu():
 
 
 def printtransposeoptions():
+    """
+    Displays the matrix transpose options.
+    """
     print('1. Main diagonal')
     print('2. Side diagonal')
     print('3. Verical line')
@@ -30,6 +37,14 @@ def printtransposeoptions():
 
 
 def matrixinput(order='', func=float):
+    """
+    Prompts the user to enter a Matrix
+
+    order: str, which represent the number of the matrix to be entered for clarity (ex. first, second...)
+    func: function, which represents how the matrix values are read (int for integer matrix, float for matrix with decimals)
+
+    Returns an instance of the Matrix Class.
+    """
     dimensions = [int(x) for x in input("Enter size of " + order + " matrix: ").strip().split(" ")]
     A = []
     print('Enter ' + order + ' matrix: ')
@@ -45,6 +60,10 @@ def matrixinput(order='', func=float):
 
 
 def main():
+    """
+    Main Program Execution. Will prompt the user for the matrix calculater options.
+    Proceed to make the operation/calculations.
+    """
 
     while True:
         printmenu()
