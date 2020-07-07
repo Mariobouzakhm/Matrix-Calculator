@@ -99,6 +99,14 @@ class Matrix:
 
             return Matrix(self.rows, self.columns, resultMatrix)
 
+    def subtract(self, B):
+        if not isinstance(B, Matrix) or (self.rows != B.rows or self.columns != B.columns):
+            print("This operation cannot be performed.")
+
+        else:
+            B = B.constantmult(-1)
+            return self.addition(B)
+
     def constantmult(self, constant):
         resultMatrix = []
 

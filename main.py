@@ -13,11 +13,12 @@ from Matrix import Matrix
 
 def printmenu():
     print('1. Add matrices')
-    print('2. Multiply matrix by a constant')
-    print('3. Multiply matrices')
-    print('4. Transpose matrix')
-    print('5. Calculate a determinant')
-    print('6. Inverse matrix')
+    print('2. Subtract matrices')
+    print('3. Multiply matrix by a constant')
+    print('4. Multiply matrices')
+    print('5. Transpose matrix')
+    print('6. Calculate a determinant')
+    print('7. Inverse matrix')
     print('0. Exit')
 
 
@@ -58,20 +59,27 @@ def main():
             C.displaymatrix()
 
         elif cmd == '2':
+            A = matrixinput(order='first')
+            B = matrixinput(order='second')
+
+            C = A.subtract(B)
+            C.displaymatrix()
+
+        elif cmd == '3':
             A = matrixinput()
             constant = float(input('Enter constant: '))
 
             B = A.constantmult(constant)
             B.displaymatrix()
 
-        elif cmd == '3':
+        elif cmd == '4':
             A = matrixinput(order='first')
             B = matrixinput(order='second')
 
             C = A.matricesmult(B)
             C.displaymatrix()
 
-        elif cmd == '4':
+        elif cmd == '5':
             print('')
             printtransposeoptions()
 
@@ -99,14 +107,14 @@ def main():
 
                 B.displaymatrix()
 
-        elif cmd == '5':
+        elif cmd == '6':
             A = matrixinput()
             det = A.determinant()
 
             print('The result is: ')
             print(str(det))
 
-        elif cmd == '6':
+        elif cmd == '7':
             A = matrixinput()
             B = A.inverse()
 
