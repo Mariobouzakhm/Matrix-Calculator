@@ -396,6 +396,68 @@ class Matrix:
         """
         return self.rows == self.columns
 
+    def __neg__(self):
+        """
+        In-line Matrix negation
+
+        Returns the negative version of the Matrix instance.
+        """
+        return self.constantmult(-1)
+
+    def __eq__(self, other):
+        """
+        Defines the condition that make two matrices equal: (both should be met)
+        - Same Size
+        - Same Elements at the same position.
+        """
+
+        return self.rows == other.rows and self.columns == other.columns and self.values == other.values
+
+    def __ne__(self, other):
+        """
+        Defines the condition that make two matrices different: (either condition)
+        - Different sizes
+        - Different Elements at the same position.
+        """
+
+        return self.rows != other.rows or self.columns != other.columns or self.values != other.values
+
+    def __add__(self, other):
+        """
+        In-line Matrix Addition
+
+        Return the addition between the Matrix instance and other Matrix.
+        """
+        return self.addition(other)
+
+    def __sub__(self, other):
+        """
+        In-line Matrix Subtraction
+
+        Return the subtraction between the Matrix instance and other Matrix.
+        """
+        return self.subtract(other)
+
+    def __mul__(self, other):
+        """
+        In-line Matrix Multiplication
+
+        Return the multiplication between the Matrix instance and other Matrix.
+        """
+        return self.matricesmult(other)
+
+    def __truediv__(self, other):
+        """
+        Matrix division is an operation that doesn't exist.
+        """
+        print('This operation cannot be perfomed.')
+
+    def __floordiv__(self, other):
+        """
+        Matrix division is an operation that doesn't exist.
+        """
+        print('This operation cannot be performed.')
+
 
 
 

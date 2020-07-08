@@ -8,8 +8,7 @@ Date: 06-2020
 Matrix Calculator Interface
 """
 
-from main.Matrix import Matrix
-
+from Matrix import Matrix
 
 def printmenu():
     """
