@@ -6,7 +6,7 @@ Matrix Calculator is a program that runs through the console and where you can p
 
 For using the Matrix class in another project:
 
-'''python
+```python
 from Matrix import Matrix
 
 #Creates a 3x3 Matrix A with the values 1 through 9
@@ -21,7 +21,7 @@ C = A.addition(B)
 #Performs Matrices multiplication
 D = A.matricesmult(B)
 
-'''
+```
 
 # Contributions
 
