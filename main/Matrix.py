@@ -388,6 +388,45 @@ class Matrix:
 
         return result
 
+    def pow(self, n):
+        """
+        Raises a matrix to the nth power to equivalent to performing the operation AxA... (n-1) times.
+        This operation can only be performed on Square Matrices.
+
+        n, int
+
+        Returns the Matrix instance risen the power n.
+        """
+        if not self.__issquare():
+            print('This operation cannot be performed.')
+        elif n == 0:
+            return Matrix.getidentitymatrix(self.rows)
+        elif n == 1:
+            return self
+        elif self.__isdiagonal():
+            result = []
+            for i in range(self.rows):
+                line = []
+                for j in range(self.columns):
+                    line.append(self.values[i][j]**n)
+                result.append(line)
+
+            return Matrix(self.rows, self.columns,result)
+        else:
+            result = self.deepcopy()
+
+            for i in range(1, n):
+                result = result.matricesmult(self)
+
+            return result
+
+    def deepcopy(self):
+        """
+        Returns a Matrix that has the same size and elements as the instance Matrix but with different references to the elements variable.
+        """
+        return Matrix(self.rows, self.columns, [[self.values[i][j] for j in range(self.columns)] for i in range(self.rows)])
+
+
     def __issquare(self):
         """
         A Square Matrix is a matrix which have the same number of rows and columns.
@@ -395,6 +434,26 @@ class Matrix:
         Returns True if the Matrix instance is a Square matrix, False otherwise.
         """
         return self.rows == self.columns
+
+    def __isdiagonal(self):
+        """
+        A Diagonal Matrix is a matrix whose elements are zero except along the mail diagonal
+
+        Returns True if the Matrix instance is a Diagonal matrix, False otherwise
+        """
+
+        if not self.__issquare():
+            return False
+
+        for i in range(self.rows):
+            for j in range(self.columns):
+                value = self.values[i][j]
+
+                if value != 0 and (i != j):
+                    return False
+
+        return True
+
 
     def __neg__(self):
         """
@@ -457,9 +516,3 @@ class Matrix:
         Matrix division is an operation that doesn't exist.
         """
         print('This operation cannot be performed.')
-
-
-
-
-
-
