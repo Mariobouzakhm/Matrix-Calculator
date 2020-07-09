@@ -21,6 +21,7 @@ def printmenu():
     print('5. Transpose matrix')
     print('6. Calculate a determinant')
     print('7. Inverse matrix')
+    print('8. Matrix Powers')
     print('0. Exit')
 
 
@@ -135,6 +136,13 @@ def main():
             A = matrixinput()
             B = A.inverse()
 
+            B.displaymatrix()
+
+        elif cmd == '8':
+            A = matrixinput()
+            power = int(input('Enter power: '))
+
+            B = A.pow(power)
             B.displaymatrix()
 
         elif cmd == '0':
