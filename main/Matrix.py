@@ -71,6 +71,13 @@ class Matrix:
 
             return sum
 
+    def size(self):
+        """
+        Returns a tuple indicating the size of the Matrix instance.
+        """
+
+        return (self.rows, self.columns)
+
     def displaymatrix(self):
         """
         Displays the matrix to the console in a table-like structure.
@@ -426,7 +433,6 @@ class Matrix:
         """
         return Matrix(self.rows, self.columns, [[self.values[i][j] for j in range(self.columns)] for i in range(self.rows)])
 
-
     def __issquare(self):
         """
         A Square Matrix is a matrix which have the same number of rows and columns.
@@ -453,7 +459,6 @@ class Matrix:
                     return False
 
         return True
-
 
     def __neg__(self):
         """
@@ -516,3 +521,38 @@ class Matrix:
         Matrix division is an operation that doesn't exist.
         """
         print('This operation cannot be performed.')
+
+    def __len__(self):
+        """
+        Returns a tuple indicating the number of elements of the matrix when the built-in len() method is
+        used on the Matrix instance.
+        """
+
+        return self.rows * self.columns
+
+    def __getitem__(self, item):
+        """
+        Returns a list representing the row with the index provided. The list can then be also indexed to
+        retrieve its elements.
+
+        item, int
+        """
+        if isinstance(item, int):
+            if item > (self.columns - 1):
+                raise KeyError('Key our of range. Could not retrieve the matrix row corresponding with the key value.')
+            else:
+                return self.values[item]
+        else:
+            raise TypeError('Key should be an integer.')
+
+    def __contains__(self, item):
+        """
+        item, real number
+
+        Returns True if item is an element of the Matrix instance False otherwise.
+        """
+        for i in range(self.rows):
+            if item in self.values[i]:
+                return True
+
+        return False
